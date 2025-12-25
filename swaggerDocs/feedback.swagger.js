@@ -170,6 +170,8 @@
  *       Fayllar `multipart/form-data` orqali yuboriladi.
  *     tags:
  *       - Feedback
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -243,6 +245,8 @@
  *     summary: Feedbackni o‘chirish
  *     tags:
  *       - Feedback
+ *     security:
+ *       - bearerAuth: []
  *     description: |
  *       Mavjud feedbackni ID orqali o‘chiradi.  
  *       Ushbu endpoint faqat **admin / superuser** huquqiga ega foydalanuvchilar uchun ochiq  

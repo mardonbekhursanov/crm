@@ -7,6 +7,7 @@ const { ServerError, ValidError } = require("../../utils/validation"); // 👈 S
 // DESCRIPTION: Automatically creates a superuser admin if it doesn't exist
 // USAGE: Call adminRegister() when server starts
 // ACCESS: private (internal use only, not exposed via API)
+
 const adminRegister = async () => {
   try {
     const existUser = await User.findOne({
@@ -80,8 +81,27 @@ const getUserById = async (req, res) =>{
       ServerError(res, error)
     }
 }
+const deleteUserForAdmin = async (req, res) => {
+  try {
+    const user = await User.findByPk(req.params.id)
+    if(!user){
+      return ValidError(res, 404, "Bunday foydalanuvchi topilmadi!")
+    }
+    await User.destroy({where: {id: user.id}})
+
+    res.status(200).json({
+      alert: {
+        message: "Foydalanuvchi muvaffaqiyatli o'chirildi!"
+      }
+    })
+  } catch (error) {
+    ServerError(res, error)
+  }
+}
 module.exports = {
   adminRegister,
   getAllUsers,
-  addAdmin
+  addAdmin,
+  getUserById,
+  deleteUserForAdmin
 };

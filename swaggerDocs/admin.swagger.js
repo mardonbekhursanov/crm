@@ -67,6 +67,8 @@
  *       Mavjud foydalanuvchini `superuser` (admin) roliga o‘tkazadi.  
  *       Ushbu endpoint faqat **superuser** huquqiga ega foydalanuvchilar uchun ochiq  
  *       (role tekshiruvi middleware orqali amalga oshiriladi).
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -109,4 +111,75 @@
  *         description: Ruxsat yo‘q (superuser emas)
  *       500:
  *         description: Server xatoligi
+ */
+/**
+ * @swagger
+ * /admin/users/{id}:
+ *   get:
+ *     summary: ID orqali foydalanuvchini olish
+ *     description: Berilgan ID bo‘yicha foydalanuvchi ma’lumotlarini qaytaradi
+ *     tags:
+ *       - Admin
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Foydalanuvchi ID raqami
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Foydalanuvchi topildi
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                 phone:
+ *                   type: string
+ *                 role:
+ *                   type: string
+ *       404:
+ *         description: Foydalanuvchi topilmadi
+ *       500:
+ *         description: Server xatosi
+ */
+/**
+ * @swagger
+ * /admin/users/{id}:
+ *   delete:
+ *     summary: Foydalanuvchini o‘chirish (Admin)
+ *     description: Admin huquqi orqali foydalanuvchini butunlay o‘chiradi
+ *     tags:
+ *       - Admin
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: O‘chiriladigan foydalanuvchi ID si
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Foydalanuvchi muvaffaqiyatli o‘chirildi
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 alert:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *       404:
+ *         description: Foydalanuvchi topilmadi
+ *       500:
+ *         description: Server xatosi
  */

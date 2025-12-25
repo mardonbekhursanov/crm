@@ -5,6 +5,8 @@
  *     summary: Yangi o‘qituvchi qo‘shish
  *     tags:
  *       - Teachers
+ *     security:
+ *       - bearerAuth: []
  *     description: |
  *       Yangi o‘qituvchi yaratadi.  
  *       `video` majburiy emas, qolgan maydonlar majburiy.
@@ -91,6 +93,8 @@
  *     summary: O‘qituvchi ma’lumotlarini yangilash
  *     tags:
  *       - Teachers
+ *     security:
+ *       - bearerAuth: []
  *     description: |
  *       O‘qituvchini qisman yangilaydi.  
  *       Faqat yuborilgan maydonlar yangilanadi.
@@ -141,6 +145,8 @@
  *     summary: O‘qituvchini o‘chirish
  *     tags:
  *       - Teachers
+ *     security:
+ *       - bearerAuth: []
  *     description: |
  *       Mavjud o‘qituvchini ID orqali o‘chiradi.  
  *       Ushbu endpoint faqat ruxsatga ega foydalanuvchilar uchun (admin/superuser).

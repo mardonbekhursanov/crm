@@ -34,6 +34,11 @@ module.exports = ( sequelize, Sequelize ) => {
         role: {
             type: Sequelize.STRING,
             defaultValue: "user"
+        },
+        debt: {
+            type: Sequelize.INTEGER,
+            defaultValue: 0,
+            allowNull: true
         }
     })
 
