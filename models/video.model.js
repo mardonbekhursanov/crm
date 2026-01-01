@@ -5,6 +5,18 @@ module.exports = (sequelize, Sequelize) => {
       defaultValue: Sequelize.UUIDV4,
       primaryKey: true
     },
+    lesson_name: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    lesson_number: {
+      type: Sequelize.INTEGER,
+      allowNull: false
+    },
+    duration: { type: 
+      Sequelize.INTEGER, 
+      allowNull: true 
+    },
     title: {
       type: Sequelize.STRING,
       allowNull: false
@@ -16,10 +28,6 @@ module.exports = (sequelize, Sequelize) => {
     courseId: {
       type: Sequelize.UUID,
       allowNull: false
-    },
-    isPreview: {
-      type: Sequelize.BOOLEAN,
-      defaultValue: false // preview videolarni belgilash uchun
     }
   });
 

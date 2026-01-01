@@ -5,4 +5,7 @@ route.use("/admin", require('./admin.route'))
 route.use("/feedback", require('./feedback.route'))
 route.use('/teachers', require("./teacher.route"))
 route.use('/comment', require('./comment.route'))
+route.use('/course', require('./course.route'))
+route.use('/purchase', require('./purchasedCourse.route')) // purchase route qo‘shildi
+
 module.exports = route

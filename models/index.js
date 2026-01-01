@@ -14,10 +14,9 @@ db.User = require("./user.model")(sequelize, Sequelize);
 db.Feedback = require("./feedback.model")(sequelize, Sequelize);
 db.Teacher = require("./teachers.module")(sequelize, Sequelize);
 db.Comment = require("./comment.model")(sequelize, Sequelize);
-db.Course = require("./course.model")(sequelize, Sequelize);
-db.Cart = require("./cart.model")(sequelize, Sequelize)
+db.Course = require("./course.model")(sequelize, Sequelize)
 db.Video = require("./video.model")(sequelize, Sequelize)
-
+db.PurchasedCourse = require('./purchasedCourse.model')(sequelize, Sequelize)
 // 1. TEACHER va COURSE (O'qituvchi va Kurs bog'liqligi)
 // Bir o'qituvchi ko'plab kurslarni yaratishi mumkin
 db.Teacher.hasMany(db.Course, { as: "courses", foreignKey: "teacherId" });

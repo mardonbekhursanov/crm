@@ -4,8 +4,8 @@ require("colors")
 const cors = require('cors')
 const app = express()
 const db = require("./models/index")
-const swaggerUi = require("swagger-ui-express");
-const swaggerJsdoc = require("swagger-jsdoc");
+const swaggerUi = require('swagger-ui-express'); 
+const swaggerJsdoc = require('swagger-jsdoc');
 const { adminRegister } = require("./controllers/admin/admin.controller")
 const path = require('path')
 
