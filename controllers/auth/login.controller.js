@@ -35,6 +35,11 @@ const login = async (req, res) => {
     res.json({
       alert: { message: "Login muvaffaqiyatli" },
       accessToken: accessToken(user),
+      user: {
+        id: user.id,
+        phone: user.phone,
+        role: user.role
+      }
     });
   } catch (error) {
     ServerError(res, error);
