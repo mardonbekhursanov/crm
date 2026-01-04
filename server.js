@@ -64,7 +64,7 @@ app.use((req, res)=>{
 
 const start = async () => {
     
-    await db.sequelize.sync({force: true})
+    await db.sequelize.sync({force: false})
 
     //Admin register
     await adminRegister()
