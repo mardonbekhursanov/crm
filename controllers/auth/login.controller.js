@@ -26,15 +26,15 @@ const login = async (req, res) => {
     // ✅ refresh token cookie
     res.cookie("refreshToken", refreshToken(user), {
       httpOnly: true,
-      secure: process.env.NODE_ENV == "production",
-      sameSite: "strict",
-      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 kun
+      secure: process.env.NODE_ENV === "production", // HTTPS faqat prod
+      sameSite: "None", // cross-site cookie
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 kun
     });
 
     // ✅ access token frontendga yuboriladi
     res.json({
       alert: { message: "Login muvaffaqiyatli" },
-      accessToken: accessToken(user)
+      accessToken: accessToken(user),
     });
   } catch (error) {
     ServerError(res, error);
@@ -54,17 +54,16 @@ const logout = async (req, res) => {
     res.clearCookie("refreshToken", {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict"
+      sameSite: "None",
     });
 
     res.status(200).json({
-      alert: { message: "Muvaffaqiyatli chiqildi!" }
+      alert: { message: "Muvaffaqiyatli chiqildi!" },
     });
   } catch (error) {
     ServerError(res, error);
   }
 };
-
 
 // ROUTE: /auth/refresh
 // METHOD: GET
@@ -81,11 +80,11 @@ const refresh = async (req, res) => {
 
     // ✅ Yangi refresh token cookie
     const newRefreshToken = refreshToken(user);
-    res.cookie("refreshToken", newRefreshToken, {
+    res.cookie("refreshToken", refreshToken(user), {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      maxAge: 7 * 24 * 60 * 60 * 1000
+      sameSite: "None",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
     // ✅ Yangi access token frontendga
