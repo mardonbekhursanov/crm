@@ -8,11 +8,15 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
 const { adminRegister } = require("./controllers/admin/admin.controller")
 const path = require('path')
+const cookieParser = require("cookie-parser");
+
+app.use(cookieParser());
 
 
 // Middlewares
 app.use(cors({
-    origin: "*"
+    origin: "*", // frontend domeni
+    credentials: true
 }))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -60,7 +64,7 @@ app.use((req, res)=>{
 
 const start = async () => {
     
-    await db.sequelize.sync({force: false})
+    await db.sequelize.sync({force: true})
 
     //Admin register
     await adminRegister()

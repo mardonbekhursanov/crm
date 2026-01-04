@@ -5,18 +5,23 @@ const User = db.User;
 // ROUTE PROTECTION: Admin only
 const isAdmin = async (req, res, next) => {
   try {
-    const authHeader = req.headers.authorization;
+    // 1️⃣ Tokenni cookie’dan olish
+    const token = req.cookies.token;
 
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    if (!token) {
       return res.status(401).json({
         alert: { message: "Authorization token yo‘q" },
       });
     }
 
-    const token = authHeader.split(" ")[1];
+    // 2️⃣ Tokenni tekshirish
     const decoded = jwt.verify(token, process.env.SECRETKEY);
 
-    const user = await User.findOne({where: {id: decoded.id}, raw: true});
+    // 3️⃣ User’ni DB’dan olish
+    const user = await User.findOne({
+      where: { id: decoded.id },
+      raw: true,
+    });
 
     if (!user) {
       return res.status(401).json({
@@ -24,21 +29,21 @@ const isAdmin = async (req, res, next) => {
       });
     }
 
+    // 4️⃣ Role tekshirish
     if (user.role !== "superuser") {
       return res.status(403).json({
         alert: { message: "Sizda bu amalni bajarish huquqi yo‘q" },
       });
     }
 
-    // user ma'lumotlarini keyingi handlerga uzatish
-
-    const {password, ...adminWithoutPassword} = user
+    // 5️⃣ Passwordni olib tashlab req.user ga qo‘yish
+    const { password, ...adminWithoutPassword } = user;
     req.user = adminWithoutPassword;
 
     next();
   } catch (error) {
     return res.status(401).json({
-      alert: { error: error.message },
+      alert: { message: "Token yaroqsiz yoki muddati tugagan" },
     });
   }
 };
