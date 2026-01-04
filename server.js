@@ -15,7 +15,7 @@ app.use(cookieParser());
 
 // Middlewares
 app.use(cors({
-    origin: "http://localhost:3000", // frontend domeni
+    origin: ["http://localhost:3000", "https://crm-h9n4.onrender.com"], // frontend domeni
     credentials: true
 }))
 app.use(express.json())
